@@ -1,0 +1,138 @@
+import { useState, useEffect } from "react";
+import "./App.css";
+import Header from "../Header/Header";
+import MobileMenuOverlay from "../../ItemMenu/ItemMenu.jsx";
+import Main from "../Main/Main";
+import Footer from "../Footer/Footer";
+import ModalWithForm from "../ModalWithForm/ModalWithForm";
+import ItemModal from "../ItemModal/ItemModal";
+import { getWeather, filterWeatherData } from "../../utils/weather";
+import { coordinates, APIkey } from "../../utils/constants";
+function App() {
+  const [isMobileMenuOpened, setIsMobileMenuOpened] = useState(false);
+
+  const [weatherData, setWeatherData] = useState({
+    type: "",
+    temp: { f: 999 },
+    city: "",
+  });
+  const [activeModal, setActiveModal] = useState("");
+  const [selectedCard, setSelectedCard] = useState({});
+  const handleAddClick = () => {
+    setActiveModal("add-garmet");
+  };
+  const closeActiveModal = () => {
+    setActiveModal("");
+  };
+  const handleCardClick = (card) => {
+    setActiveModal("preview");
+    setSelectedCard(card);
+  };
+  function openMobileMenu() {
+    setIsMobileMenuOpened(true);
+  }
+
+  function closeMobileMenu() {
+    setIsMobileMenuOpened(false);
+  }
+  useEffect(() => {
+    // Fetch weather data based on coordinates
+    getWeather(coordinates, APIkey)
+      .then((data) => {
+        const filterData = filterWeatherData(data);
+        setWeatherData(filterData);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
+  return (
+    <div className="page">
+      <div className="page__content">
+        <Header
+          handleAddClick={handleAddClick}
+          weatherData={weatherData}
+          openMobileMenu={openMobileMenu}
+        />
+        {isMobileMenuOpened && (
+          <MobileMenuOverlay
+            closeMobileMenu={closeMobileMenu}
+            handleAddClick={handleAddClick}
+          />
+        )}
+
+        <Main weatherData={weatherData} handleCardClick={handleCardClick} />
+      </div>
+      <Footer />
+      <ModalWithForm
+        title="New garment"
+        buttonText="Add garment"
+        activeModal={activeModal}
+        closeActiveModal={closeActiveModal}
+      >
+        <label className="modal__label" htmlFor="name">
+          Name{""}{" "}
+          <input
+            className="modal__input"
+            id="name"
+            type="text"
+            placeholder="Name"
+          />
+        </label>
+        <label className="" htmlFor="imageURL">
+          Image{""}{" "}
+          <input
+            type="url"
+            className="modal__input"
+            id="imageURL"
+            placeholder="Image URL"
+          />
+        </label>
+        <fieldset className="modal__fieldset">
+          <legend className="modal__legend">Select the weather type:</legend>
+          <label className="modal__label modal__label_type_radio" htmlFor="hot">
+            <input
+              type="radio"
+              className="modal__radio-input"
+              id="hot"
+              name="radio-option-1"
+            />
+            <span>Hot</span>
+          </label>
+          <label
+            className="modal__label modal__label_type_radio"
+            htmlFor="warm"
+          >
+            <input
+              type="radio"
+              className="modal__radio-input"
+              id="warm"
+              name="radio-option-1"
+            />
+            <span>Warm</span>
+          </label>
+          <label
+            className="modal__label modal__label_type_radio"
+            htmlFor="cold"
+          >
+            <input
+              type="radio"
+              className="modal__radio-input"
+              id="cold"
+              name="radio-option-1"
+            />
+            <span>Cold</span>
+          </label>
+        </fieldset>
+      </ModalWithForm>
+      <ItemModal
+        activeModal={activeModal}
+        card={selectedCard}
+        closeActiveModal={closeActiveModal}
+      />
+    </div>
+  );
+}
+
+export default App;
