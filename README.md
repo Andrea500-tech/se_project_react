@@ -1,8 +1,18 @@
-# React + Vite
+# Project 3: se_project_react
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A responsive weather & item showcase
 
-Currently, two official plugins are available:
+Description
+se_project_react is a responsive web app where users can browse weather cards and interact with item cards via modals — view details, add or remove items, and enjoy a smooth mobile-first experience.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Tech Stack
+
+- HTML – Structure and content of the pages
+- CSS – Styling and responsive layouts (Grid, Flexbox, and media queries)
+- React – Component-driven UI and state management
+- Vite – Fast dev server and build tooling
+
+Deployment
+No demo video available.
+
+This webpage is deployed to GitHub Pages — [view it here].(https://andrea500-tech.github.io/se_project_react/)
