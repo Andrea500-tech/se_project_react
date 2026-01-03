@@ -1,20 +1,12 @@
-@font-face {
-  src: url("../assets/fonts/CabinetGrotesk-Bold.woff2") format("woff2");
-  font-family: "CabinetGrotesk";
-  font-weight: 700;
-  font-style: normal;
-
-}
-.page{
-  background-color: #F3F3F3;
-  font-family: "CabinetGrotesk";
+.page {
+  background-color: #f3f3f3;
+  font-family: "Cabinet Grotesk", system-ui, -apple-system, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
   font-weight: 700;
 }
-.page__content{
+.page__content {
   max-width: 1360px;
   margin: 0 auto;
-  padding: 0 20px; 
-  position: relative; 
+  padding: 0 20px;
+  position: relative;
 }
-
-  

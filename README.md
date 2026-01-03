@@ -15,4 +15,4 @@ Tech Stack
 Deployment
 No demo video available.
 
-This webpage is deployed to GitHub Pages — [view it here].(https://andrea500-tech.github.io/se_project_react/)
+This webpage is deployed to GitHub Pages — [view it here](https://andrea500-tech.github.io/se_project_react/)

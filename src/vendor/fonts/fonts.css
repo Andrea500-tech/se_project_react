@@ -1,0 +1,11 @@
+/* Vendor font definitions */
+
+@font-face {
+  font-family: "Cabinet Grotesk";
+  src: url("./CabinetGrotesk-Bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Add additional @font-face rules here if more font files are added to src/assets/fonts */
