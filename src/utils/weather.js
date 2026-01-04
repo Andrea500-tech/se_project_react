@@ -55,7 +55,7 @@ result.condition = data.weather[0].main.toLowerCase();
 result.isDayTime = isDayTime(data.sys,Date.now());
 return result;
 };
- const determineWeatherTypec = (temperature) => {
+ const determineWeatherType = (temperature) => {
  if (temperature > 86) {
    return "hot";
  } else if ( temperature >= 66 && temperature < 86 ) {

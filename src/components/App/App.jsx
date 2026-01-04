@@ -9,7 +9,7 @@ import ItemModal from "../ItemModal/ItemModal";
 import { getWeather, filterWeatherData } from "../../utils/weather";
 import {
   coordinates,
-  APIkey,
+  apikey,
   defaultClothingItems,
 } from "../../utils/constants";
 function App() {
@@ -44,7 +44,7 @@ function App() {
   }
   useEffect(() => {
     // Fetch weather data based on coordinates
-    getWeather(coordinates, apikey)
+    getWeather(coordinates,apikey)
       .then((data) => {
         const filterData = filterWeatherData(data);
         setWeatherData(filterData);
