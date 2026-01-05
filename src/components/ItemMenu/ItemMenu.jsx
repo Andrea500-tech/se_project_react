@@ -1,6 +1,6 @@
 import "./ItemMenu.css";
-import avatar from "../assets/avatar.png";
-import closeIcon from "../assets/close-icon.svg";
+import avatar from "../../assets/avatar.png";
+import closeIcon from "../../assets/close-icon.svg";
 function MobileMenuOverlay({ closeMobileMenu, handleAddClick }) {
   return (
     <div className="mobile-overlay">
