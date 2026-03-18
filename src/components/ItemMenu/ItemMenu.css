@@ -5,7 +5,7 @@
   transform: translateX(-50%);
   width: calc(100% - 40px); /* matches page content width */
   max-width: 1360px;
-  height: 190px;
+  height: 240px;
   z-index: 1000;
   display: flex;
   justify-content: center;
@@ -45,8 +45,14 @@
   align-items: center;
   gap: 24px;
   margin-top: 60px;
+  width: 100%;
 }
 
+.mobile-overlay-link{
+  text-decoration: none;
+  cursor: pointer;
+   color: inherit;
+}
 .mobile-overlay__user {
   display: flex;
   align-items: center;
@@ -67,6 +73,8 @@
   cursor: pointer;
   font-family: "CabinetGrotesk";
 }
+
+
 @media (max-width: 768px) {
   .mobile-overlay {
     width: calc(100% - 40px);

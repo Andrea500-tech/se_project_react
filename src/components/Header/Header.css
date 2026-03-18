@@ -1,11 +1,9 @@
 .header {
   display: flex;
-  max-width: 1360px;
   width: 100%;
-  margin: 0 auto;
   align-items: center;
   position: relative;
-  padding: 0 20px; /* moved here so header and main align */
+  padding: 0; /* rely on .page__content padding for alignment */
 }
 .header__inner {
   position: relative;
@@ -29,6 +27,13 @@
   margin: 0 20px 0 auto;
   font-size: 20px;
   line-height: 24px;
+}
+.header__right-side {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  align-items: center;
+  margin-left: auto;
 }
 .header__add-clothes_btn {
   margin-left: auto;
@@ -63,12 +68,21 @@
 .header__logo-wrapper {
   margin-left: -16px;
 }
+.header__nav-link {
+  text-decoration: none;
+  color: inherit;
+}
+.header__nav-link:hover {
+  color: #00000099;
+}
+
 @media (max-width: 768px) {
   .header {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
   }
+
   .header__inner {
     position: relative;
     padding: 0; /* padding is on .header now */
@@ -78,26 +92,33 @@
 
   .header__top-left {
     display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 4px;
-    margin: 0;
+    flex-direction: row;
+    gap: 12px;
+    margin: 8px;
   }
-
+ 
+  .header__right-side {
+    display: none;
+  }
   .header__logo {
     margin: 0;
     padding: 0;
     transform: none;
+      width: 89px;
+      height: 40px;
   }
 
   .header__date_and-location {
-    margin: 0;
+    font-size: 16px;
+    line-height: 20px;
+    margin:  0;
+
   }
   .header__mobile-menu-button {
     display: block;
     position: absolute;
-    top: 20px;
-    right: 20px; /* align with header padding edge */
+    top: 18px;
+    right: 0; /* align with header padding edge */
     margin-left: auto;
     background: transparent;
     border: none;

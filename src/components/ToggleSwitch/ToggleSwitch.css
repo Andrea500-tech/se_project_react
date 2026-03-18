@@ -1,0 +1,66 @@
+*:focus {
+  outline: 5px solid #ff0000;
+}
+.toggle-switch {
+  width: 56px;
+  height: 28px;
+  border: 2px solid #000;
+  border-radius: 20px;
+  position: relative;
+  cursor: pointer;
+  overflow: hidden;
+}
+.toggle-switch:hover .toggle-switch__slider {
+  transform: translateX(14px);
+}
+.toggle-switch__input:checked:hover ~ .toggle-switch__slider {
+  transform: translateX(14px);
+}
+.toggle-switch:hover .toggle-switch__text {
+  color: #fff; 
+}
+.toggle-switch__input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+.toggle-switch__slider{
+  position: absolute;
+  left: 0;
+  top: 0;
+  background-color: #000;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  transition: transform 0.3s ease;
+}
+
+
+
+.toggle-switch__text{
+  position: absolute;
+  top: 5px;
+  font-size: 14px;
+  line-height: 1;
+  color: #7E7E7E;
+}
+.toggle-switch__text_f{
+  left: 9px;
+}
+.toggle-switch__text_c{
+  right: 9px;
+}
+.toggle-switch__input:checked ~ .toggle-switch__slider {
+  transform: translateX(28px);
+}
+.toggle-switch__text_color_white{
+  color: #fff;
+}
+/* toggle-switch using css
+.toggle-switch__input:not(:checked) ~ .toggle-switch__text_f{
+color:#fff;
+}
+.toggle-switch__input:checked ~ .toggle-switch__text_c{
+color:#fff;
+}
+*/

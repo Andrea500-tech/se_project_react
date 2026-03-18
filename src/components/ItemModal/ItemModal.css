@@ -28,15 +28,26 @@ position: relative;
   line-height: 24px;
   
 }
-.modal__title-type-image{
+.modal__caption {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.modal__caption-button{
+  border: none;
+  color: #ff0000;
+  background: none;
+  cursor: pointer;
+}
+.modal__caption-title--image{
   margin: 0;
 }
-.modal__weather{
+.modal__caption-weather{
   margin: 12px 0 24px;
 }
 @media screen and (max-width: 768px) {
   .modal__with-image{
-     position: absolute; 
+    position: absolute; 
     top: 0;     
     left: 0;
     width: 100%;

@@ -21,22 +21,20 @@ export const weatherOptions = [
   },
 ];
 export const defaultWeatherOptions = {
-  day:{
-    day:true,
-    condition:"unknown",
-    url: new URL("../assets/day/default.png",import.meta.url).href,
-    
-
+  day: {
+    day: true,
+    condition: "unknown",
+    url: new URL("../assets/day/default.png", import.meta.url).href,
   },
-  night:{
-    day:false,
-    condition:"unknown",
-    url: new URL("../assets/night/default.png",import.meta.url).href,
+  night: {
+    day: false,
+    condition: "unknown",
+    url: new URL("../assets/night/default.png", import.meta.url).href,
   },
-}
+};
 export const getWeather = ({ latitude, longitude }, APIkey) => {
   return fetch(
-    `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=imperial&appid=${APIkey}`
+    `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=imperial&appid=${APIkey}`,
   ).then((res) => {
     if (res.ok) {
       return res.json();
@@ -48,24 +46,25 @@ export const getWeather = ({ latitude, longitude }, APIkey) => {
 export const filterWeatherData = (data) => {
   const result = {};
   result.city = data.name;
-  
-result.temp ={f:data.main.temp};
-result.type = determineWeatherType(result.temp.f);
-result.condition = data.weather[0].main.toLowerCase();
-result.isDayTime = isDayTime(data.sys,Date.now());
-return result;
+
+  result.temp = {
+    f: Math.round(data.main.temp),
+    c: Math.round(((data.main.temp - 32) * 5) / 9),
+  };
+  result.type = determineWeatherType(result.temp.f);
+  result.condition = data.weather[0].main.toLowerCase();
+  result.isDayTime = isDayTime(data.sys, Date.now());
+  return result;
 };
- const determineWeatherType = (temperature) => {
- if (temperature > 86) {
-   return "hot";
- } else if ( temperature >= 66 && temperature < 86 ) {
-   return "warm";
- } else {
-   return "cold";
- }
+const determineWeatherType = (temperature) => {
+  if (temperature > 86) {
+    return "hot";
+  } else if (temperature >= 66 && temperature < 86) {
+    return "warm";
+  } else {
+    return "cold";
+  }
 };
- const isDayTime = ({ sunrise, sunset},now) => {
-   
+const isDayTime = ({ sunrise, sunset }, now) => {
   return sunrise * 1000 < now && now < sunset * 1000;
-  
- };
+};

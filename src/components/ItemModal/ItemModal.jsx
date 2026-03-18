@@ -1,6 +1,7 @@
 import closeIcon from "../../assets/close-icon.svg";
 import "./ItemModal.css";
-function ItemModal({ activeModal, card, closeActiveModal }) {
+import { ConfirmDeleteModal } from "../ConfirmDeleteModal/ConfirmDeleteModal";
+function ItemModal({ activeModal, card, closeActiveModal, isOpen, onConfirm,handleConfirmOpen,handleConfirmClose }) {
   return (
     <div
       className={`modal ${
@@ -15,14 +16,33 @@ function ItemModal({ activeModal, card, closeActiveModal }) {
         >
           <img src={closeIcon} alt="close icon" />
         </button>
-        <img src={card.link} alt={card.name} className="modal__image-preview" />
+        <img
+          src={card.imageUrl}
+          alt={card.name}
+          className="modal__image-preview"
+        />
         <div className="modal__footer">
-          <h2 className="modal__caption modal__title-type-image">
-            {card.name}
-          </h2>
-          <p className="modal__weather">weather: {card.weather}</p>
+          <div className="modal__caption">
+            <h2 className="modal__caption-title modal__caption-title--image">
+              {card.name}
+            </h2>
+            <button
+              type="button"
+              className="modal__caption-button"
+              onClick={handleConfirmOpen}
+            >
+              Delete item
+            </button>
+          </div>
+          <p className="modal__caption-weather">weather: {card.weather}</p>
         </div>
       </div>
+      {/* Inline confirmation modal */}
+      <ConfirmDeleteModal
+        isOpen={isOpen}
+        onConfirm={onConfirm}
+        closeActiveModal={handleConfirmClose}
+      />
     </div>
   );
 }
