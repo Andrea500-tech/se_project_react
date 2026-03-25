@@ -10,17 +10,17 @@ function MobileMenuOverlay({ closeMobileMenu, handleAddClick,toggleSwitch }) {
       </button>
       <div className="mobile-overlay__inner">
         <div className="mobile-overlay__content">
-          <NavLink to="/Profile" className="mobile-overlay-link">
+          <NavLink to="/profile" className="mobile-overlay-link">
             <div className="mobile-overlay__user">
               <p>Terrence Tegegne</p>
               <img
-                src={avatar}
+                  src={avatar}
                 alt="Terrence Tegegne"
                 className="mobile-overlay__avatar"
               />
             </div>
           </NavLink>
-          <button className="mobile-overlay__add" onClick={handleAddClick}>
+          <button className="mobile-overlay__add"  onClick={() => { closeMobileMenu(); handleAddClick(); }}>
             + Add clothes
           </button>
           {toggleSwitch}

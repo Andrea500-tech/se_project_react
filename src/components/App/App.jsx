@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
-import { useLocation } from "react-router-dom";
 import "./App.css";
 import Header from "../Header/Header";
 import ToggleSwitch from "../ToggleSwitch/ToggleSwitch";
@@ -11,7 +10,7 @@ import Footer from "../Footer/Footer";
 import AddItemModal from "../AddItemModal/AddItemModal";
 import ItemModal from "../ItemModal/ItemModal";
 import { getWeather, filterWeatherData } from "../../utils/weather";
-import { coordinates, apikey } from "../../utils/constants";
+import { coordinates, apiKey } from "../../utils/constants";
 import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperatureUnitContext";
 import { addItem, getItems,removeItem } from "../../utils/api";
 function App() {
@@ -121,7 +120,7 @@ function App() {
   };
   useEffect(() => {
     // Fetch weather data based on coordinates
-    getWeather(coordinates, apikey)
+    getWeather(coordinates, apiKey)
       .then((data) => {
         const filterData = filterWeatherData(data);
         setWeatherData(filterData);
@@ -188,6 +187,11 @@ function App() {
         <Footer />
 
         <AddItemModal
+          key={
+            activeModal === "add-garment"
+              ? "add-garment-open"
+              : "add-garment-closed"
+          }
           isOpen={activeModal === "add-garment"}
           onClose={closeActiveModal}
           onAddItem={onAddItem}
