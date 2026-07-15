@@ -1,7 +1,11 @@
 import closeIcon from "../../assets/close-icon.svg";
 import "./ItemModal.css";
 import { ConfirmDeleteModal } from "../ConfirmDeleteModal/ConfirmDeleteModal";
+import { useContext } from "react";
+import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 function ItemModal({ activeModal, card, closeActiveModal, isOpen, onConfirm,handleConfirmOpen,handleConfirmClose }) {
+  const { currentUser } = useContext(CurrentUserContext);
+  const isOwn = card.owner === currentUser._id;
   return (
     <div
       className={`modal ${
@@ -26,6 +30,7 @@ function ItemModal({ activeModal, card, closeActiveModal, isOpen, onConfirm,hand
             <h2 className="modal__caption-title modal__caption-title--image">
               {card.name}
             </h2>
+            {isOwn && (
             <button
               type="button"
               className="modal__caption-button"
@@ -33,6 +38,7 @@ function ItemModal({ activeModal, card, closeActiveModal, isOpen, onConfirm,hand
             >
               Delete item
             </button>
+            )}
           </div>
           <p className="modal__caption-weather">weather: {card.weather}</p>
         </div>

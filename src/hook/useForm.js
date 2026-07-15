@@ -1,9 +1,20 @@
 import { useState } from "react";
-export function useForm(defaultValues){
-const [values,setValues] = useState(defaultValues);
-function handleChange(evt){
-  const {name,value} = evt.target;
-  setValues({...values,[name]:value});
-}
-return {values,setValues,handleChange};
+import { validateField } from "../utils/validation"; // import your field-level validator
+
+export function useForm(defaultValues) {
+  const [values, setValues] = useState(defaultValues);
+  const [errors, setErrors] = useState({});
+
+  function handleChange(evt) {
+    const { name, value } = evt.target;
+
+    // update values
+    setValues((prev) => ({ ...prev, [name]: value }));
+
+    // run validation for this field
+    const errorMessage = validateField(name, value);
+    setErrors((prev) => ({ ...prev, [name]: errorMessage }));
+  }
+
+  return { values, errors, setValues, handleChange };
 }

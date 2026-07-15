@@ -1,10 +1,19 @@
 import "./Profile.css";
 import { ClothesSection } from "../ClothesSection/ClothesSection";
 import { SideBar } from "../SideBar/SideBar";
-export function Profile({ clothingItems, handleCardClick, handleAddClick }) {
+export function Profile({
+  clothingItems,
+  handleCardClick,
+  handleAddClick,
+  handleEditProfileClick,
+  handleSignOut,
+}) {
   return (
     <section className="profile">
-      <SideBar />
+      <SideBar
+        handleEditProfileClick={handleEditProfileClick}
+        handleSignOut={handleSignOut}
+      />
       <ClothesSection
         clothingItems={clothingItems}
         handleCardClick={handleCardClick}

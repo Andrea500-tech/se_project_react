@@ -16,14 +16,17 @@ se_project_react is a responsive web app where users can browse weather cards an
 ## Repository
 
 Clone the project here:  
-[GitHub Repository](https://github.com/Andrea500-tech/se_project_react.git)
+[Frontend Repository](https://github.com/Andrea500-tech/se_project_react.git)
+
+Backend repository (required for full functionality):  
+[Backend Repository](https://github.com/Andrea500-tech/se_project_express.git)
 
 ## Deployment
 
 This project is deployed to GitHub Pages for a static UI preview:  
 [View it here](https://andrea500-tech.github.io/se_project_react/)
 
-⚠️ Note: The GitHub Pages version shows the UI only. Full functionality (with local API calls) is demonstrated in the video below.
+ Note: The GitHub Pages version shows the UI only. Full functionality (with local API calls) is demonstrated in the video below.
 
 ## Demo Video
 

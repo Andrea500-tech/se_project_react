@@ -1,6 +1,16 @@
 import "./ModalWithForm.css";
 import closeIcon from "../../assets/close-icon.svg";
-function ModalWithForm({ children, buttonText, title, isOpen, name, onClose,onSubmit }) {
+function ModalWithForm({
+  children,
+  buttonText,
+  extraButton,
+  title,
+  isOpen,
+  name,
+  onClose,
+  onSubmit,
+  isFormValid,
+}) {
   return (
     <div
       className={`modal ${
@@ -14,9 +24,16 @@ function ModalWithForm({ children, buttonText, title, isOpen, name, onClose,onSu
         </button>
         <form className="modal__form" onSubmit={onSubmit}>
           {children}
-          <button className="modal__submit" type="submit">
-            {buttonText}
-          </button>
+          <div className="modal__buttons">
+            <button
+              style={{ background: isFormValid ? "#000" : "#0000004D" }}
+              className="modal__submit"
+              type="submit"
+            >
+              {buttonText}
+            </button>
+            <button className="modal__extrabutton">{extraButton}</button>
+          </div>
         </form>
       </div>
     </div>

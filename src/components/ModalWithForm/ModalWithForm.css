@@ -103,8 +103,25 @@
 .modal__radio-input:checked + span {
   color: #000;
 }
+.modal__error {
+  display: block;
+  margin-top: 6px;
+  font-size: 14px;
+  line-height: 1.4;
+  color: #d93025; /* strong red for errors */
+}
+
+/* Highlight invalid inputs */
+.modal__input.error {
+  border-bottom: 2px solid #d93025;
+}
+.modal__buttons {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
 .modal__submit{
-  width: 124px;
+  width: 128px;
   height: 36px;
   color: #fff;
   padding: 8px 16px;
@@ -115,6 +132,15 @@
   margin: 0;
   text-align: center;
 
+}
+.modal__extrabutton{
+  background: none;
+  border: none;
+  color: #00000080;
+  cursor: pointer;
+  font-size: 16px;
+  line-height: 20px;
+  
 }
 @media screen and (max-width: 768px) {
   .modal__with-form {
