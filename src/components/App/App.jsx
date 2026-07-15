@@ -80,6 +80,8 @@ function App() {
       avatar: "",
     });
   };
+ const openLogin = () => setActiveModal("login");
+ const openRegister = () => setActiveModal("register");
   const handleCardLike = ({ _id, isLiked }) => {
     const token = getToken();
 
@@ -331,6 +333,7 @@ function App() {
                       handleAddClick={handleAddClick}
                       handleEditProfileClick={handleEditProfileClick}
                       handleSignOut={handleSignOut}
+                      onCardLike={handleCardLike}
                     />
                   </ProtectedRoute>
                 }
@@ -368,6 +371,7 @@ function App() {
               // call backend /signin here
               handleLogin(values);
             }}
+            onSwitchToRegister={openRegister}
           />
 
           <RegisterModal
@@ -379,6 +383,7 @@ function App() {
             }}
             isFormValid={isFormValid}
             setFormValues={setFormValues}
+            onSwitchToLogin={openLogin}
           />
 
           <ItemModal

@@ -4,14 +4,15 @@ import { useContext } from "react";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import "./ItemCard.css";
 function ItemCard({ item, onCardClick, onCardLike }) {
-  const {currentUser} = useContext(CurrentUserContext);
+  const { currentUser } = useContext(CurrentUserContext);
   if (!item) return null;
   const handleItemClick = () => {
     onCardClick(item);
   };
   //  derive isLiked from item.likes
-  const isLiked = item.likes.some((id) => id === currentUser._id);
+  const isLiked = item.likes.some((id) => id === currentUser?._id);
   const handleLike = () => {
+    if (!currentUser?._id) return;
     onCardLike({
       _id: item._id,
       isLiked: isLiked,
@@ -24,7 +25,7 @@ function ItemCard({ item, onCardClick, onCardLike }) {
     <li className="card">
       <div className="card__title-container">
         <h2 className="card__title">{item.name}</h2>
-        {currentUser && (
+        {currentUser?._id && (
           <button className={itemLikeButtonClassName} onClick={handleLike}>
             <img
               src={isLiked ? likeActiveIcon : heartIcon}

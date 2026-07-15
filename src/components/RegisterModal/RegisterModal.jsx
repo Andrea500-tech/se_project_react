@@ -1,7 +1,7 @@
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import { useForm } from "../../hook/useForm";
 
-const RegisterModal = ({ isOpen, onRegister, onClose, isFormValid, setFormValues }) => {
+const RegisterModal = ({ isOpen, onRegister, onClose, isFormValid, setFormValues, onSwitchToLogin }) => {
   const defaultValues = { name: "", email: "", password: "", avatar: "" };
   const { values, errors, handleChange } = useForm(defaultValues);
 
@@ -27,12 +27,13 @@ const RegisterModal = ({ isOpen, onRegister, onClose, isFormValid, setFormValues
       onClose={onClose}
       onSubmit={handleSubmit}
       isFormValid={isFormValid}
+      onExtraButtonClick={onSwitchToLogin}
     >
-      <label className="modal__label" htmlFor="email">
+      <label className="modal__label" htmlFor="register-email">
         Email
         <input
           className="modal__input"
-          id="email"
+          id="register-email"
           type="email"
           name="email"
           placeholder="Email"
@@ -42,11 +43,11 @@ const RegisterModal = ({ isOpen, onRegister, onClose, isFormValid, setFormValues
         />
         {errors.email && <span className="modal__error">{errors.email}</span>}
       </label>
-      <label className="modal__label" htmlFor="password">
+      <label className="modal__label" htmlFor="register-password">
         Password
         <input
           className="modal__input"
-          id="password"
+          id="register-password"
           type="password"
           name="password"
           placeholder="Password"
@@ -54,13 +55,15 @@ const RegisterModal = ({ isOpen, onRegister, onClose, isFormValid, setFormValues
           onChange={handleInputChange}
           required
         />
-        {errors.password && <span className="modal__error">{errors.password}</span>}
+        {errors.password && (
+          <span className="modal__error">{errors.password}</span>
+        )}
       </label>
-      <label className="modal__label" htmlFor="name">
+      <label className="modal__label" htmlFor="register-name">
         Name
         <input
           className="modal__input"
-          id="name"
+          id="register-name"
           type="text"
           name="name"
           placeholder="Name"
@@ -71,11 +74,11 @@ const RegisterModal = ({ isOpen, onRegister, onClose, isFormValid, setFormValues
         {errors.name && <span className="modal__error">{errors.name}</span>}
       </label>
 
-      <label className="modal__label" htmlFor="avatar">
+      <label className="modal__label" htmlFor="register-avatar">
         Avatar URL
         <input
           className="modal__input"
-          id="avatar"
+          id="register-avatar"
           type="url"
           name="avatar"
           placeholder="Avatar URL"

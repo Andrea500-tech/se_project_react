@@ -1,6 +1,6 @@
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import { useForm } from "../../hook/useForm";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 
 export const EditProfileModal = ({
@@ -13,13 +13,22 @@ export const EditProfileModal = ({
   const { currentUser } = useContext(CurrentUserContext);
 
   const defaultValues = {
-    name: currentUser.name,
-    avatar: currentUser.avatar,
+    name: currentUser?.name ?? "",
+    avatar: currentUser?.avatar ?? "",
   };
 
-  const { values, errors, handleChange } = useForm(defaultValues);
+  const { values, errors, handleChange, reset } = useForm(defaultValues);
 
-  // Wrap handleChange to update both local and global state
+  // Sync form values when modal opens or currentUser changes
+  useEffect(() => {
+    if (isOpen && currentUser) {
+      reset({
+        name: currentUser.name ?? "",
+        avatar: currentUser.avatar ?? "",
+      });
+    }
+  }, [isOpen, currentUser, reset]);
+
   const handleInputChange = (e) => {
     handleChange(e); // local state + errors
     const { name, value } = e.target;
@@ -41,11 +50,11 @@ export const EditProfileModal = ({
       onSubmit={handleSubmit}
       isFormValid={isFormValid}
     >
-      <label className="modal__label" htmlFor="name">
+      <label className="modal__label" htmlFor="edit-name">
         Name
         <input
           className="modal__input"
-          id="name"
+          id="edit-name"
           name="name"
           type="text"
           placeholder="Name"
@@ -55,11 +64,11 @@ export const EditProfileModal = ({
         {errors.name && <span className="modal__error">{errors.name}</span>}
       </label>
 
-      <label className="modal__label" htmlFor="avatar">
+      <label className="modal__label" htmlFor="edit-avatar">
         Avatar
         <input
           className="modal__input"
-          id="avatar"
+          id="edit-avatar"
           name="avatar"
           type="url"
           placeholder="Avatar URL"

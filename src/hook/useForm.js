@@ -15,6 +15,11 @@ export function useForm(defaultValues) {
     const errorMessage = validateField(name, value);
     setErrors((prev) => ({ ...prev, [name]: errorMessage }));
   }
+  // Add reset function
+  function reset(newValues = defaultValues) {
+    setValues(newValues);
+    setErrors({});
+  }
 
-  return { values, errors, setValues, handleChange };
+  return { values, errors, setValues, handleChange, reset };
 }

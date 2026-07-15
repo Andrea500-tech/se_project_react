@@ -7,6 +7,7 @@ const LoginModal = ({
   onClose,
   isFormValid,
   setFormValues,
+  onSwitchToRegister,
 }) => {
   const defaultValues = { email: "", password: "" };
   const { values, errors, handleChange } = useForm(defaultValues);
@@ -33,12 +34,13 @@ const LoginModal = ({
       onClose={onClose}
       onSubmit={handleSubmit}
       isFormValid={isFormValid}
+      onExtraButtonClick={onSwitchToRegister}
     >
-      <label className="modal__label" htmlFor="email">
+      <label className="modal__label" htmlFor="login-email">
         Email
         <input
           className="modal__input"
-          id="email"
+          id="login-email"
           type="email"
           name="email"
           value={values.email}
@@ -48,11 +50,11 @@ const LoginModal = ({
         />
         {errors.email && <span className="modal__error">{errors.email}</span>}
       </label>
-      <label className="modal__label" htmlFor="password">
+      <label className="modal__label" htmlFor="login-password">
         Password
         <input
           className="modal__input"
-          id="password"
+          id="login-password"
           type="password"
           name="password"
           value={values.password}
@@ -60,7 +62,9 @@ const LoginModal = ({
           placeholder="Password"
           required
         />
-        {errors.password && <span className="modal__error">{errors.password}</span>}
+        {errors.password && (
+          <span className="modal__error">{errors.password}</span>
+        )}
       </label>
     </ModalWithForm>
   );
