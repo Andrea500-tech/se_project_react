@@ -1,29 +1,23 @@
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
+import { useEffect } from "react";
 import { useForm } from "../../hook/useForm";
-
-const LoginModal = ({
-  isOpen,
-  onLogin,
-  onClose,
-  isFormValid,
-  setFormValues,
-  onSwitchToRegister,
-}) => {
+import { validateForm } from "../../utils/validation";
+const LoginModal = ({ isOpen, onLogin, onClose, onSwitchToRegister }) => {
   const defaultValues = { email: "", password: "" };
-  const { values, errors, handleChange } = useForm(defaultValues);
-
-  // Wrap handleChange to update both local and global state
-  const handleInputChange = (e) => {
-    handleChange(e); // local state
-    const { name, value } = e.target;
-    setFormValues((prev) => ({ ...prev, [name]: value })); // global state in App
-  };
+  const { values, errors, handleChange, reset } = useForm(defaultValues);
+  const isFormValid = validateForm("login", values);
 
   function handleSubmit(e) {
     e.preventDefault();
     onLogin(values);
+    reset(); // Reset the form after submission
   }
-
+  // clear whenever modal opens
+  useEffect(() => {
+    if (isOpen) {
+      reset();
+    }
+  }, [isOpen]);
   return (
     <ModalWithForm
       title="Log in"
@@ -44,7 +38,7 @@ const LoginModal = ({
           type="email"
           name="email"
           value={values.email}
-          onChange={handleInputChange}
+          onChange={handleChange}
           placeholder="Email"
           required
         />
@@ -58,7 +52,7 @@ const LoginModal = ({
           type="password"
           name="password"
           value={values.password}
-          onChange={handleInputChange}
+          onChange={handleChange}
           placeholder="Password"
           required
         />

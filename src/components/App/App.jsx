@@ -80,8 +80,8 @@ function App() {
       avatar: "",
     });
   };
- const openLogin = () => setActiveModal("login");
- const openRegister = () => setActiveModal("register");
+  const openLogin = () => setActiveModal("login");
+  const openRegister = () => setActiveModal("register");
   const handleCardLike = ({ _id, isLiked }) => {
     const token = getToken();
 
@@ -119,14 +119,6 @@ function App() {
 
   const [clothingItems, setClothingItems] = useState([]);
   const [isFormValid, setIsFormValid] = useState(false);
-  const [formValues, setFormValues] = useState({
-    name: "",
-    email: "",
-    avatar: "",
-    imageUrl: "",
-    password: "",
-    weather: "",
-  });
   // Handlers for modals
   const handleAddClick = () => {
     setActiveModal("add-garment");
@@ -167,7 +159,7 @@ function App() {
       .then(() => {
         setClothingItems(clothingItems.filter((item) => item._id !== id));
         handleConfirmClose();
-        setActiveModal(""); // close preview modal too
+        closeActiveModal(); // close preview modal too
       })
       .catch(console.error);
   };
@@ -274,10 +266,6 @@ function App() {
       })
       .catch(console.error);
   }, []);
-  useEffect(() => {
-    const valid = validateForm(activeModal, formValues);
-    setIsFormValid(valid);
-  }, [formValues, activeModal]);
 
   return (
     <CurrentTemperatureUnitContext.Provider
@@ -348,8 +336,6 @@ function App() {
               isOpen={activeModal === "edit-profile"}
               onClose={closeActiveModal}
               onUpdateUser={handleUpdateUser}
-              isFormValid={isFormValid}
-              setFormValues={setFormValues}
             />
           )}
           {isLoggedIn && (
@@ -357,16 +343,12 @@ function App() {
               isOpen={activeModal === "add-garment"}
               onClose={closeActiveModal}
               onAddItem={onAddItem}
-              isFormValid={isFormValid}
-              setFormValues={setFormValues}
             />
           )}
 
           <LoginModal
             isOpen={activeModal === "login"}
             onClose={closeActiveModal}
-            isFormValid={isFormValid}
-            setFormValues={setFormValues}
             onLogin={(values) => {
               // call backend /signin here
               handleLogin(values);
@@ -381,8 +363,6 @@ function App() {
               // call backend /signup here
               handleRegistration(values);
             }}
-            isFormValid={isFormValid}
-            setFormValues={setFormValues}
             onSwitchToLogin={openLogin}
           />
 

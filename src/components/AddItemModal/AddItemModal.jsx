@@ -1,30 +1,29 @@
+import { useEffect } from "react";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import { useForm } from "../../hook/useForm";
 import "./AddItemModal.css";
-const AddItemModal = ({
-  isOpen,
-  onAddItem,
-  onClose,
-  isFormValid,
-  setFormValues,
-}) => {
+import { validateForm } from "../../utils/validation";
+const AddItemModal = ({ isOpen, onAddItem, onClose }) => {
   const defaultValues = {
     name: "",
     imageUrl: "",
     weather: "",
   };
-  const { values, errors, handleChange } = useForm(defaultValues);
 
-  // Wrap handleChange so it updates both local and global state
-  const handleInputChange = (e) => {
-    handleChange(e); // updates local `values`
-    const { name, value } = e.target;
-    setFormValues((prev) => ({ ...prev, [name]: value })); // updates App's `formValues`
-  };
+  const { values, errors, handleChange, reset } = useForm(defaultValues);
+  const isFormValid = validateForm("add-garment", values);
+
   function handleSubmit(evt) {
     evt.preventDefault();
     onAddItem(values);
+    reset(); // Reset the form after submission
   }
+  // clear whenever modal opens
+  useEffect(() => {
+    if (isOpen) {
+      reset();
+    }
+  }, [isOpen]);
   return (
     <ModalWithForm
       title="New garment"
@@ -44,10 +43,11 @@ const AddItemModal = ({
           type="text"
           placeholder="Name"
           value={values.name}
-          onChange={handleInputChange}
+          onChange={handleChange}
         />
         {errors.name && <span className="modal__error">{errors.name}</span>}
       </label>
+
       <label className="modal__label" htmlFor="add-imageURL">
         Image
         <input
@@ -56,43 +56,58 @@ const AddItemModal = ({
           id="add-imageURL"
           name="imageUrl"
           value={values.imageUrl}
-          onChange={handleInputChange}
+          onChange={handleChange}
           placeholder="Image URL"
         />
-        {errors.imageUrl && <span className="modal__error">{errors.imageUrl}</span>}
+        {errors.imageUrl && (
+          <span className="modal__error">{errors.imageUrl}</span>
+        )}
       </label>
+
       <fieldset className="modal__fieldset">
         <legend className="modal__legend">Select the weather type:</legend>
-        <label className="modal__label modal__label_type_radio" htmlFor="add-hot">
+
+        <label
+          className="modal__label modal__label_type_radio"
+          htmlFor="add-hot"
+        >
           <input
             type="radio"
             className="modal__radio-input"
             id="add-hot"
             name="weather"
             value="hot"
-            onChange={handleInputChange}
+            onChange={handleChange}
           />
           <span>Hot</span>
         </label>
-        <label className="modal__label modal__label_type_radio" htmlFor="add-warm">
+
+        <label
+          className="modal__label modal__label_type_radio"
+          htmlFor="add-warm"
+        >
           <input
             type="radio"
             className="modal__radio-input"
             id="add-warm"
             name="weather"
             value="warm"
-            onChange={handleInputChange}
+            onChange={handleChange}
           />
           <span>Warm</span>
         </label>
-        <label className="modal__label modal__label_type_radio" htmlFor="add-cold">
+
+        <label
+          className="modal__label modal__label_type_radio"
+          htmlFor="add-cold"
+        >
           <input
             type="radio"
             className="modal__radio-input"
-            name="weather"
             id="add-cold"
+            name="weather"
             value="cold"
-            onChange={handleInputChange}
+            onChange={handleChange}
           />
           <span>Cold</span>
         </label>

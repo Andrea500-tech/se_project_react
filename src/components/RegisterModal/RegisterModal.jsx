@@ -1,21 +1,24 @@
+import { useEffect } from "react";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import { useForm } from "../../hook/useForm";
-
-const RegisterModal = ({ isOpen, onRegister, onClose, isFormValid, setFormValues, onSwitchToLogin }) => {
+import { validateForm } from "../../utils/validation";
+const RegisterModal = ({ isOpen, onRegister, onClose, onSwitchToLogin }) => {
   const defaultValues = { name: "", email: "", password: "", avatar: "" };
-  const { values, errors, handleChange } = useForm(defaultValues);
+  const { values, errors, handleChange, reset } = useForm(defaultValues);
 
-  // Wrap handleChange to update both local and global state
-  const handleInputChange = (e) => {
-    handleChange(e); // local state
-    const { name, value } = e.target;
-    setFormValues((prev) => ({ ...prev, [name]: value })); // global state in App
-  };
-
+  const isFormValid = validateForm("register", values); // Validate the form based on the current values
   function handleSubmit(e) {
     e.preventDefault();
     onRegister(values); // send data up to App
+    reset(); // Reset the form after submission
   }
+
+  // clear whenever modal opens
+  useEffect(() => {
+    if (isOpen) {
+      reset();
+    }
+  }, [isOpen]);
 
   return (
     <ModalWithForm
@@ -26,8 +29,8 @@ const RegisterModal = ({ isOpen, onRegister, onClose, isFormValid, setFormValues
       isOpen={isOpen}
       onClose={onClose}
       onSubmit={handleSubmit}
-      isFormValid={isFormValid}
       onExtraButtonClick={onSwitchToLogin}
+      isFormValid={isFormValid}
     >
       <label className="modal__label" htmlFor="register-email">
         Email
@@ -38,7 +41,7 @@ const RegisterModal = ({ isOpen, onRegister, onClose, isFormValid, setFormValues
           name="email"
           placeholder="Email"
           value={values.email}
-          onChange={handleInputChange}
+          onChange={handleChange}
           required
         />
         {errors.email && <span className="modal__error">{errors.email}</span>}
@@ -52,7 +55,7 @@ const RegisterModal = ({ isOpen, onRegister, onClose, isFormValid, setFormValues
           name="password"
           placeholder="Password"
           value={values.password}
-          onChange={handleInputChange}
+          onChange={handleChange}
           required
         />
         {errors.password && (
@@ -68,7 +71,7 @@ const RegisterModal = ({ isOpen, onRegister, onClose, isFormValid, setFormValues
           name="name"
           placeholder="Name"
           value={values.name}
-          onChange={handleInputChange}
+          onChange={handleChange}
           required
         />
         {errors.name && <span className="modal__error">{errors.name}</span>}
@@ -83,9 +86,10 @@ const RegisterModal = ({ isOpen, onRegister, onClose, isFormValid, setFormValues
           name="avatar"
           placeholder="Avatar URL"
           value={values.avatar}
-          onChange={handleInputChange}
+          onChange={handleChange}
           required
         />
+        {errors.avatar && <span className="modal__error">{errors.avatar}</span>}
       </label>
     </ModalWithForm>
   );

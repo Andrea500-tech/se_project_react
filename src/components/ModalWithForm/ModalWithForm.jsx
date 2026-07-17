@@ -9,8 +9,8 @@ function ModalWithForm({
   name,
   onClose,
   onSubmit,
-  isFormValid,
   onExtraButtonClick,
+  isFormValid,
 }) {
   return (
     <div
@@ -33,6 +33,7 @@ function ModalWithForm({
             >
               {buttonText}
             </button>
+           {extraButton &&  onExtraButtonClick && (
             <button
               className="modal__extrabutton"
               type="button"
@@ -40,6 +41,7 @@ function ModalWithForm({
             >
               {extraButton}
             </button>
+           )}
           </div>
         </form>
       </div>
