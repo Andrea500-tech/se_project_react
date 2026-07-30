@@ -81,6 +81,7 @@ const AddItemModal = ({ isOpen, onAddItem, onClose }) => {
             id="add-hot"
             name="weather"
             value="hot"
+            checked={values.weather === "hot"}
             onChange={handleChange}
           />
           <span>Hot</span>
@@ -96,6 +97,7 @@ const AddItemModal = ({ isOpen, onAddItem, onClose }) => {
             id="add-warm"
             name="weather"
             value="warm"
+            checked={values.weather === "warm"}
             onChange={handleChange}
           />
           <span>Warm</span>
@@ -111,6 +113,7 @@ const AddItemModal = ({ isOpen, onAddItem, onClose }) => {
             id="add-cold"
             name="weather"
             value="cold"
+            checked={values.weather === "cold"}
             onChange={handleChange}
           />
           <span>Cold</span>
