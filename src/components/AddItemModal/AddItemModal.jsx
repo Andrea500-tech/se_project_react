@@ -20,6 +20,7 @@ const AddItemModal = ({ isOpen, onAddItem, onClose }) => {
       return;
     }
     onAddItem(values);
+    onClose();
     reset(); // Reset the form after submission
   }
   // clear whenever modal opens
