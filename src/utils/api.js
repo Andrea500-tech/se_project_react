@@ -17,7 +17,13 @@ const getHeaders = () => {
 };
 
 export const handleServerResponse = (res) => {
-  return res.ok ? res.json() : Promise.reject(`Error: ${res.status}`);
+  if (res.ok) {
+    return res.json();
+  }
+  return res.json().then((err) => {
+    console.error("Server error:", err); // log the actual error
+    return Promise.reject(err);
+  });
 };
 
 export const getItems = () => { 
