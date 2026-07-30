@@ -222,16 +222,16 @@ function App() {
       name: inputValues.name,
       imageUrl: inputValues.imageUrl,
       weather: inputValues.weather,
-      createdAt: Date.now(),
-      owner: currentUser._id,
     };
+
     addItem(newItem)
-      .then((items) => {
-        setClothingItems([items, ...clothingItems]);
+      .then((item) => {
+        setClothingItems([item, ...clothingItems]);
         closeActiveModal();
       })
       .catch(console.error);
   };
+
 
   useEffect(() => {
     getWeather(coordinates, apiKey)

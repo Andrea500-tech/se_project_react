@@ -1,5 +1,8 @@
 import { handleServerResponse } from "./api";
-const baseUrl = "http://localhost:3001";
+const baseUrl =
+  process.env.NODE_ENV === "production"
+    ? "https://api.migombewtwr.strangled.net"
+    : "http://localhost:3001";
 const headers = { "Content-Type": "application/json" };
 const signUp = ({name, avatar, email, password}) => {
   return fetch(`${baseUrl}/signup`, {
