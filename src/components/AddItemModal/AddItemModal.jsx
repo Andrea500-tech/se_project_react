@@ -15,6 +15,10 @@ const AddItemModal = ({ isOpen, onAddItem, onClose }) => {
 
   function handleSubmit(evt) {
     evt.preventDefault();
+    if (!values.weather) {
+      console.error("Weather must be selected!");
+      return;
+    }
     onAddItem(values);
     reset(); // Reset the form after submission
   }
