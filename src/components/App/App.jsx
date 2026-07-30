@@ -223,7 +223,7 @@ function App() {
       imageUrl: inputValues.imageUrl,
       weather: inputValues.weather,
     };
-
+    console.log("Payload (component):", newItem);
     addItem(newItem)
       .then((item) => {
         setClothingItems([item, ...clothingItems]);
@@ -231,7 +231,6 @@ function App() {
       })
       .catch(console.error);
   };
-
 
   useEffect(() => {
     getWeather(coordinates, apiKey)

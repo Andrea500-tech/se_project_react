@@ -27,6 +27,8 @@ export const getItems = () => {
 };
 
 export const addItem = ({ name, imageUrl, weather }) => {
+  const payload = { name, imageUrl, weather };
+  console.log("Payload to POST /items:", payload); 
   return fetch(`${baseUrl}/items`, {
     method: "POST",
     headers: getHeaders(),
