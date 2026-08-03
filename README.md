@@ -31,4 +31,4 @@ This project is deployed to GitHub Pages for a static UI preview:
 ## Demo Video
 
 Watch my project pitch here:  
-[Loom Video](https://www.loom.com/share/0a18b46eabe0424bbd8381912786b1f4)
+[Loom Video](https://www.loom.com/share/843819c616554cc3ae656e259149a938)
