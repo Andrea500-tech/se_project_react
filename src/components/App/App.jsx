@@ -13,7 +13,7 @@ import LoginModal from "../LoginModal/LoginModal";
 import RegisterModal from "../RegisterModal/RegisterModal";
 import { EditProfileModal } from "../EditProfileModal/EditProfileModal";
 import { getWeather, filterWeatherData } from "../../utils/weather";
-import { coordinates, apiKey } from "../../utils/constants";
+import { coordinates} from "../../utils/constants";
 import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperatureUnitContext";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import {
@@ -233,7 +233,7 @@ function App() {
   };
 
   useEffect(() => {
-    getWeather(coordinates, apiKey)
+    getWeather(coordinates)
       .then((data) => {
         const filterData = filterWeatherData(data);
         setWeatherData(filterData);
