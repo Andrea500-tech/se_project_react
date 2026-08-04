@@ -1,3 +1,6 @@
+//  Pull API key from Vite env
+const API_KEY = import.meta.env.VITE_API_KEY;
+
 export const weatherOptions = [
   {
     day: true,
@@ -20,6 +23,7 @@ export const weatherOptions = [
     url: new URL("../assets/night/cloudy.svg", import.meta.url).href,
   },
 ];
+
 export const defaultWeatherOptions = {
   day: {
     day: true,
@@ -32,9 +36,11 @@ export const defaultWeatherOptions = {
     url: new URL("../assets/night/default.png", import.meta.url).href,
   },
 };
-export const getWeather = ({ latitude, longitude }, APIkey) => {
+
+//  Use API_KEY directly from import.meta.env
+export const getWeather = ({ latitude, longitude }) => {
   return fetch(
-    `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=imperial&appid=${APIkey}`,
+    `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=imperial&appid=${API_KEY}`,
   ).then((res) => {
     if (res.ok) {
       return res.json();
@@ -43,6 +49,7 @@ export const getWeather = ({ latitude, longitude }, APIkey) => {
     }
   });
 };
+
 export const filterWeatherData = (data) => {
   const result = {};
   result.city = data.name;
@@ -56,6 +63,7 @@ export const filterWeatherData = (data) => {
   result.isDayTime = isDayTime(data.sys, Date.now());
   return result;
 };
+
 const determineWeatherType = (temperature) => {
   if (temperature > 86) {
     return "hot";
@@ -65,6 +73,7 @@ const determineWeatherType = (temperature) => {
     return "cold";
   }
 };
+
 const isDayTime = ({ sunrise, sunset }, now) => {
   return sunrise * 1000 < now && now < sunset * 1000;
 };
